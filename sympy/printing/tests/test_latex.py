@@ -143,6 +143,12 @@ def test_latex_DiracDelta():
     assert latex(DiracDelta(x,0)) == "$\\delta\\left(x\\right)$"
     assert latex(DiracDelta(x,5)) == "$\\delta^{\\left( 5 \\right)}\\left( x \\right)$"
 
+def test_inline():
+    expr = x+y
+    assert latex(expr) == '$x + y$'
+    assert latex(expr, inline=None) == 'x + y'
+    assert latex(expr, inline=False)== '\\begin{equation*}x + y\\end{equation*}'
+
 def test_latex_Piecewise():
     p = Piecewise((x,x<1),(x**2,True))
     assert latex(p) == "$\\left\\{\\begin{array}{cl} x & for x < 1 \\\\x^{2} &" \

@@ -41,7 +41,9 @@ class LatexPrinter(Printer):
     def doprint(self, expr):
         tex = Printer.doprint(self, expr)
 
-        if self._settings['inline']:
+        if self._settings['inline'] is None:
+            return tex
+        elif self._settings['inline']:
             return r"$%s$" % tex
         else:
             return r"\begin{equation*}%s\end{equation*}" % tex
