@@ -25,6 +25,7 @@ class LatexPrinter(Printer):
         }
 
         self._settings = {
+            "wrap" : "inline",
             "inline" : True,
             "fold_frac_powers" : False,
             "fold_func_brackets" : False,
@@ -41,8 +42,10 @@ class LatexPrinter(Printer):
     def doprint(self, expr):
         tex = Printer.doprint(self, expr)
 
-        if self._settings['inline']:
+        if self._settings['wrap'].lower() == 'inline':
             return r"$%s$" % tex
+        elif self._settings['wrap'].lower() == 'none':
+            return tex
         else:
             return r"\begin{equation*}%s\end{equation*}" % tex
 
